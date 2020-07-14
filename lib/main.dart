@@ -143,6 +143,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
                 return Center(
+                    //OnTapped: _onRequestTapped(index);
                   child: CircularProgressIndicator(),
                 );
                 break;
@@ -162,6 +163,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   return ListView.builder(
                     itemCount: requests.length,
                     itemBuilder: (BuildContext context, int index) {
+
                       return RequestItem(
                         request: requests[index],
                       );
@@ -232,7 +234,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      
+
+    });
+  }
+
+  void _onRequestTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyStatefulWidget()),
+      );
+
     });
   }
 
@@ -241,7 +254,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: const Text('Wolcare'),
       ),
       body: Center(
         child: test(_selectedIndex),
