@@ -6,6 +6,7 @@ import 'package:wolcaire/user_item.dart';
 import 'package:flutter/material.dart';
 import 'package:wolcaire/workshop.dart';
 import 'package:wolcaire/workshop_item.dart';
+import 'package:http/http.dart' as http;
 
 import 'api_services.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: MyStatefulWidget(),
+      home: LoginPage(),
     );
   }
 }
@@ -266,4 +267,166 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
     );
   }
+}
+
+class LoginPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new _LoginPageState();
+}
+
+// Used for controlling whether the user is loggin or creating an account
+enum FormType {
+  login,
+  register
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  final TextEditingController _emailFilter = new TextEditingController();
+  final TextEditingController _passwordFilter = new TextEditingController();
+  String _email = "";
+  String _password = "";
+  FormType _form = FormType.login; // our default setting is to login, and we should switch to creating an account when the user chooses to
+
+  _LoginPageState() {
+    _emailFilter.addListener(_emailListen);
+    _passwordFilter.addListener(_passwordListen);
+  }
+
+  void _emailListen() {
+    if (_emailFilter.text.isEmpty) {
+      _email = "";
+    } else {
+      _email = _emailFilter.text;
+    }
+  }
+
+  void _passwordListen() {
+    if (_passwordFilter.text.isEmpty) {
+      _password = "";
+    } else {
+      _password = _passwordFilter.text;
+    }
+  }
+
+  // Swap in between our two forms, registering and logging in
+  void _formChange () async {
+    setState(() {
+      if (_form == FormType.register) {
+        _form = FormType.login;
+      } else {
+        _form = FormType.register;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: _buildBar(context),
+      body: new Container(
+        padding: EdgeInsets.all(16.0),
+        child: new Column(
+          children: <Widget>[
+            _buildTextFields(),
+            _buildButtons(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBar(BuildContext context) {
+    return new AppBar(
+      title: new Text("Simple Login Example"),
+      centerTitle: true,
+    );
+  }
+
+  Widget _buildTextFields() {
+    return new Container(
+      child: new Column(
+        children: <Widget>[
+          new Container(
+            child: new TextField(
+              controller: _emailFilter,
+              decoration: new InputDecoration(
+                  labelText: 'Email'
+              ),
+            ),
+          ),
+          new Container(
+            child: new TextField(
+              controller: _passwordFilter,
+              decoration: new InputDecoration(
+                  labelText: 'Password'
+              ),
+              obscureText: true,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildButtons() {
+    if (_form == FormType.login) {
+      return new Container(
+        child: new Column(
+          children: <Widget>[
+            new RaisedButton(
+              child: new Text('Login'),
+              onPressed: _loginPressed,
+            ),
+            new FlatButton(
+              child: new Text('Vous n\'avez pas de compte ? Inscrivez vous.'),
+              onPressed: _formChange,
+            ),
+            new FlatButton(
+              child: new Text('Mot de passe oublié ?'),
+              onPressed: _passwordReset,
+            )
+          ],
+        ),
+      );
+    } else {
+      return new Container(
+        child: new Column(
+          children: <Widget>[
+            new RaisedButton(
+              child: new Text('Crée un compte'),
+              onPressed: _createAccountPressed,
+            ),
+            new FlatButton(
+              child: new Text('Vous avez deja un compte? Connectez-vous!.'),
+              onPressed: _formChange,
+            )
+          ],
+        ),
+      );
+    }
+  }
+
+  // These functions can self contain any user auth logic required, they all have access to _email and _password
+
+  void _loginPressed () {
+    print('L\'utilisateur souhaite se connecter avec $_email et $_password');
+    ApiServices services = new ApiServices();
+   // services.login(_email,_password);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyStatefulWidget()),
+    );
+  }
+
+  void _createAccountPressed () {
+    print('L\'utilisateurs veut se connecter avec  $_email et $_password');
+
+  }
+
+  void _passwordReset () {
+    print("L\'utilisateur veut qu'on envoi le mail de renisialisation a  $_email");
+  }
+
+
 }

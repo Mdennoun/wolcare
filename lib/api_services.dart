@@ -6,6 +6,31 @@ import 'package:wolcaire/user.dart';
 import 'package:wolcaire/workshop.dart';
 
 class ApiServices {
+
+  Future<void> login(String email, String password) async {
+   print("test");
+   final response =
+       await http.post(
+     'https://wolcare.herokuapp.com/api/auth/login',
+     headers: <String, String>{
+       'Content-Type': 'application/json; charset=UTF-8',
+     },
+     body: jsonEncode(<String, String>{
+       'Mail': email,
+       'Password': password
+     }),
+   );
+
+   if (response.statusCode != 200) {
+     throw Error();
+   }
+   final jsonBody = json.decode(response.body);
+   print(jsonBody);
+
+
+
+  }
+
   static Future<List<User>> getUsers() async {
     final response =
         await http.get("https://wolcare.herokuapp.com/api/getUsers");
