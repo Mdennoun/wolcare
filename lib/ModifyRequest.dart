@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 class ModifyRequest extends StatelessWidget {
   static const String routeName = "ModifyRequest";
 
-  final int identifier;
+  final String identifier;
 
   const ModifyRequest({
-    Key key,
     this.identifier,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

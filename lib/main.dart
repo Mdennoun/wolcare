@@ -162,25 +162,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   }
                   return ListView.builder(
                     itemCount: requests.length,
+
                     itemBuilder: (BuildContext context, int index) {
 
-                      return GestureDetector(
-                        child: Text(requests.toString()),
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ModifyRequest()),
-                          );
-                        },
 
-                      );
                       return RequestItem(
 
-
                         request: requests[index],
-
                       );
-
 
 
                     },

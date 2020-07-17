@@ -3,6 +3,8 @@ import 'package:wolcaire/request.dart';
 import 'package:wolcaire/user.dart';
 import 'package:wolcaire/workshop.dart';
 
+import 'ModifyRequest.dart';
+
 class RequestItem extends StatelessWidget {
   final Request request;
 
@@ -17,6 +19,12 @@ class RequestItem extends StatelessWidget {
       leading: Icon(Icons.build),
       title: Text("${request.title} ${request.psuedoUser}"),
       subtitle: Text(request.createAt),
+      onTap: (){
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => ModifyRequest(identifier: request.id)),
     );
+      }
+      );
   }
 }
