@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wolcaire/ModifyRequest.dart';
 import 'package:wolcaire/request.dart';
 import 'package:wolcaire/request_item.dart';
 import 'package:wolcaire/user.dart';
@@ -143,7 +144,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
                 return Center(
-                    //OnTapped: _onRequestTapped(index);
                   child: CircularProgressIndicator(),
                 );
                 break;
@@ -164,11 +164,28 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     itemCount: requests.length,
                     itemBuilder: (BuildContext context, int index) {
 
-                      return RequestItem(
-                        request: requests[index],
+                      return GestureDetector(
+                        child: Text(requests.toString()),
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ModifyRequest()),
+                          );
+                        },
+
                       );
+                      return RequestItem(
+
+
+                        request: requests[index],
+
+                      );
+
+
+
                     },
                   );
+
                 } else {
                   return Center(
                     child: Text("No data"),
@@ -241,10 +258,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void _onRequestTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MyStatefulWidget()),
-      );
+
 
     });
   }
