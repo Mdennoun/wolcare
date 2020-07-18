@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/ModifyRequest.dart';
+import 'package:wolcaire/request/ModifyRequest.dart';
+import 'package:intl/intl.dart';
 
 class DetailsRequest extends StatelessWidget {
   static const String routeName = "DetailsRequest";
@@ -43,13 +44,15 @@ class DetailsRequest extends StatelessWidget {
               style: new TextStyle(fontSize: 30, color: Colors.blueAccent),),
             Padding(
               padding: const EdgeInsets.all(15.0),
+
               child: Text("Date de création :",
                   style: new TextStyle(fontSize: 18, color: Colors.black)),
             ),
-            Text(" ${createAt ?? 'undefined'}",
+            Text(" ${dateConverter() ?? 'undefined'}",
                 style: new TextStyle(fontSize: 18, color: Colors.black)),
             Padding(
               padding: const EdgeInsets.all(15.0),
+
               child: Text("pseudo de l'utilisateur : ",
                 style: new TextStyle(fontSize: 20, color: Colors.green),),
             ),
@@ -57,6 +60,7 @@ class DetailsRequest extends StatelessWidget {
               style: new TextStyle(fontSize: 20, color: Colors.green),),
             Padding(
               padding: const EdgeInsets.all(15.0),
+
               child: Text("Description : ",
                 style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
             ),
@@ -88,4 +92,10 @@ class DetailsRequest extends StatelessWidget {
       centerTitle: true,
     );
   }
-}
+
+  String dateConverter () {
+    final dateFormat = new DateFormat('yyyy-MM-dd');
+    var date = dateFormat.parse(createAt.toString());
+    String createFormatted = dateFormat.format(date);
+    return createFormatted;
+  }}

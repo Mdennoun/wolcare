@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wolcaire/request.dart';
+import 'package:wolcaire/model/request.dart';
 import 'package:wolcaire/user.dart';
-import 'package:wolcaire/workshop.dart';
+import 'package:wolcaire/model/workshop.dart';
 
 class ApiServices {
 
@@ -34,6 +34,27 @@ class ApiServices {
     final response =
     await http.put(
       'https://wolcare.herokuapp.com/api/updateRequest/$id',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'title': title,
+        'description': description
+      }),
+    );
+
+    if (response.statusCode != 200) {
+      throw Error();
+    }
+    final jsonBody = json.decode(response.body);
+    print(jsonBody);
+
+  }
+
+  Future<void> modificationOfWorkShop(String title, String description, String id) async {
+    final response =
+    await http.put(
+      'https://wolcare.herokuapp.com/api/updateWorkShop/$id',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/request.dart';
+import 'package:wolcaire/model/request.dart';
 
 
-import 'DetailsRequest.dart';
+import '../request/DetailsRequest.dart';
 
 class RequestItem extends StatelessWidget {
   final Request request;
