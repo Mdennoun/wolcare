@@ -34,23 +34,47 @@ class DetailsRequest extends StatelessWidget {
 
           children: <Widget>[
 
-
-            Text("Title : ${title ?? 'undefined'}",
-              style: new TextStyle(fontSize: 30, color: Colors.orange),),
-            Text("Date de création : ${createAt ?? 'undefined'}",
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Titre : ",
+                style: new TextStyle(fontSize: 30, color: Colors.blueAccent),),
+            ),
+            Text( "${title ?? 'undefined'}",
+              style: new TextStyle(fontSize: 30, color: Colors.blueAccent),),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Date de création :",
+                  style: new TextStyle(fontSize: 18, color: Colors.black)),
+            ),
+            Text(" ${createAt ?? 'undefined'}",
                 style: new TextStyle(fontSize: 18, color: Colors.black)),
-            Text("pseudo de l'utilisateur : ${pseudoUser ?? 'undefined'}",
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("pseudo de l'utilisateur : ",
+                style: new TextStyle(fontSize: 20, color: Colors.green),),
+            ),
+            Text("${pseudoUser ?? 'undefined'}",
               style: new TextStyle(fontSize: 20, color: Colors.green),),
-            Text("Description : ${description ?? 'undefined'}",
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Description : ",
+                style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
+            ),
+            Text("${description ?? 'undefined'}",
               style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
-            RaisedButton(
-              child: Text("Modifer"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ModifyRequest(id: id, title: title, description: description, createAt: createAt, pseudoUser: pseudoUser, )),
-                );
-              },
+            Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: RaisedButton(
+                child: Text("Modifer"),
+                color: Colors.blue,
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ModifyRequest(id: id, title: title, description: description, createAt: createAt, pseudoUser: pseudoUser, )),
+                  );
+                },
+              ),
             ),
           ],
         ),

@@ -58,7 +58,7 @@ class ModifyRequest extends StatelessWidget {
               child: Text("Enregistrer les modifications"),
               onPressed: () {
                 ApiServices services = new ApiServices();
-                services.modificationOfRequest(titlEdt.text.toString(),description, id);
+                services.modificationOfRequest(titlEdt.text.toString(),descriptionEdt.text.toString(), id);
                 Navigator.of(context).pop();
 
 
