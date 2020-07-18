@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wolcaire/ModifyRequest.dart';
 import 'package:wolcaire/request.dart';
 import 'package:wolcaire/request_item.dart';
 import 'package:wolcaire/user.dart';
@@ -162,12 +163,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   }
                   return ListView.builder(
                     itemCount: requests.length,
+
                     itemBuilder: (BuildContext context, int index) {
+
+
                       return RequestItem(
+
                         request: requests[index],
                       );
+
+
                     },
                   );
+
                 } else {
                   return Center(
                     child: Text("No data"),
@@ -233,7 +241,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      
+
+    });
+  }
+
+  void _onRequestTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+
+
     });
   }
 
@@ -242,7 +258,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        title: const Text('Wolcare'),
       ),
       body: Center(
         child: test(_selectedIndex),

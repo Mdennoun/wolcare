@@ -32,9 +32,32 @@ class ApiServices {
    final Login login =  Login.fromJson(jsonBody);
    return login;
 
+  }
 
+
+  Future<void> modificationOfRequest(String title, String description, String id) async {
+    final response =
+    await http.put(
+      'https://wolcare.herokuapp.com/api/updateRequest/$id',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'title': title,
+        'description': description
+      }),
+    );
+
+    if (response.statusCode != 200) {
+      throw Error();
+    }
+    final jsonBody = json.decode(response.body);
+    print(jsonBody);
 
   }
+
+
+
 
   static Future<List<User>> getUsers() async {
     final response =
