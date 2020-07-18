@@ -26,9 +26,10 @@ class ModifyRequest extends StatelessWidget {
   });
 
 
-
   @override
   Widget build(BuildContext context) {
+    final titlEdt = new TextEditingController(text: title);
+    final descriptionEdt = new TextEditingController(text: description);
     return Scaffold(
       appBar: _buildBar(context),
       body: Center(
@@ -56,7 +57,8 @@ class ModifyRequest extends StatelessWidget {
             RaisedButton(
               child: Text("Enregistrer les modifications"),
               onPressed: () {
-                _updateModification();
+                ApiServices services = new ApiServices();
+                services.modificationOfRequest(titlEdt.text.toString(),description, id);
                 Navigator.of(context).pop();
 
 
@@ -76,9 +78,5 @@ class ModifyRequest extends StatelessWidget {
     );
   }
 
-  void _updateModification () {
-    ApiServices services = new ApiServices();
-     services.modificationOfRequest(title,description, id);
 
-  }
 }
