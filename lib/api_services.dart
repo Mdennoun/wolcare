@@ -1,31 +1,36 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:wolcaire/login_response.dart';
 import 'package:wolcaire/request.dart';
 import 'package:wolcaire/user.dart';
 import 'package:wolcaire/workshop.dart';
 
 class ApiServices {
 
-  Future<void> login(String email, String password) async {
+  Future<Login> login(String email, String password) async {
    print("test");
    final response =
        await http.post(
-     'https://wolcare.herokuapp.com/api/auth/login',
+     'https://wolcare.herokuapp.com/api/auth/login/',
      headers: <String, String>{
        'Content-Type': 'application/json; charset=UTF-8',
      },
      body: jsonEncode(<String, String>{
-       'Mail': email,
-       'Password': password
+       'email': email,
+       'password': password
      }),
    );
+   print(response.statusCode);
 
    if (response.statusCode != 200) {
      throw Error();
    }
    final jsonBody = json.decode(response.body);
    print(jsonBody);
+   final Login login =  Login.fromJson(jsonBody);
+   return login;
 
 
 

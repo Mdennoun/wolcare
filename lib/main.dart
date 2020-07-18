@@ -9,6 +9,7 @@ import 'package:wolcaire/workshop_item.dart';
 import 'package:http/http.dart' as http;
 
 import 'api_services.dart';
+import 'login_response.dart';
 
 void main() => runApp(MyApp());
 
@@ -338,7 +339,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildBar(BuildContext context) {
     return new AppBar(
-      title: new Text("Simple Login Example"),
+      title: new Text("Wolcare"),
       centerTitle: true,
     );
   }
@@ -412,11 +413,13 @@ class _LoginPageState extends State<LoginPage> {
   void _loginPressed () {
     print('L\'utilisateur souhaite se connecter avec $_email et $_password');
     ApiServices services = new ApiServices();
-   // services.login(_email,_password);
-    Navigator.push(
+    Future<Login> login = services.login(_email,_password);
+    print("test ok ?");
+    print(login.toString());
+   /* Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => MyStatefulWidget()),
-    );
+    );*/
   }
 
   void _createAccountPressed () {
