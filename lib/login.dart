@@ -174,29 +174,81 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildTextFields() {
-    return new Container(
-      child: new Column(
-        children: <Widget>[
-          new Container(
-            child: new TextField(
-              controller: _emailFilter,
-              decoration: new InputDecoration(
-                  labelText: 'Email'
+    if(_form == FormType.login){
+        return new Container(
+          child: new Column(
+            children: <Widget>[
+              new Container(
+                child : new TextField(
+                  controller: _emailFilter,
+                  decoration: new InputDecoration(
+                    labelText: 'Email'
+                  ),
+                )
               ),
-            ),
+              new Container(
+                child :new TextField(
+                  controller: _passwordFilter,
+                  decoration: new InputDecoration(
+                    labelText: 'Mot de passe'
+                  ),
+                ),
+              ),
+            ],
           ),
-          new Container(
-            child: new TextField(
-              controller: _passwordFilter,
-              decoration: new InputDecoration(
-                  labelText: 'Password'
+        );
+    } else {
+      return new Container(
+        child: new Column(
+          children: <Widget>[
+            new Container(
+              child: new TextField(
+                controller: _emailFilter,
+                decoration: new InputDecoration(
+                    labelText: 'Email'
+                ),
               ),
-              obscureText: true,
             ),
-          )
-        ],
-      ),
-    );
+            new Container(
+              child: new TextField(
+                controller: _passwordFilter,
+                decoration: new InputDecoration(
+                    labelText: 'Password'
+                ),
+                obscureText: true,
+              ),
+            ),
+            new Container(
+              child: new TextField(
+                controller: _pseudoFilter,
+                decoration: new InputDecoration(
+                    labelText: 'Pseudo'
+                ),
+                obscureText: true,
+              ),
+            ),
+            new Container(
+              child: new TextField(
+                controller: _firstNameFilter,
+                decoration: new InputDecoration(
+                    labelText: 'prenom'
+                ),
+                obscureText: true,
+              ),
+            ),
+            new Container(
+              child: new TextField(
+                controller: _lastNameFilter,
+                decoration: new InputDecoration(
+                    labelText: 'nom'
+                ),
+                obscureText: true,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Widget _buildButtons() {
@@ -224,7 +276,7 @@ class _LoginPageState extends State<LoginPage> {
         child: new Column(
           children: <Widget>[
             new RaisedButton(
-              child: new Text('Crée un compte'),
+              child: new Text('S\'inscrir'),
               onPressed: _createAccountPressed,
             ),
             new FlatButton(
