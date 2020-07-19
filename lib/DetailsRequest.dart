@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/request/ModifyRequest.dart';
+import 'package:wolcaire/ModifyRequest.dart';
 import 'package:intl/intl.dart';
 
 class DetailsRequest extends StatelessWidget {

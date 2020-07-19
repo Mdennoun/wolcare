@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/user.dart';
-import 'package:wolcaire/model/workshop.dart';
-import 'package:wolcaire/workShop/DetailsWorkShop.dart';
+import 'package:wolcaire/workshop.dart';
+import 'package:wolcaire/DetailsWorkShop.dart';
 
 class WorkshopItem extends StatelessWidget {
   final Workshop workshop;

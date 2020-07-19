@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/request/ModifyRequest.dart';
 import 'package:intl/intl.dart';
-import 'package:wolcaire/workShop/MidifyWorkShop.dart';
+import 'package:wolcaire/ModifyWorkShop.dart';
 
 class DetailsWorkShop extends StatelessWidget {
   static const String routeName = "DetailsWorkShop";
@@ -13,16 +12,21 @@ class DetailsWorkShop extends StatelessWidget {
   final String idCreator;
   final String description;
   final String idVolunteer;
+  final String dateAvailable;
+  final String datEnd;
+
 
 
   const DetailsWorkShop({
+    this.dateAvailable,
     this.title,
     this.id,
     this.idVolunteer,
     this.idCreator,
     this.createAt,
     this.pseudoUser,
-    this.description
+    this.description,
+    this.datEnd
   });
 
   @override
@@ -57,14 +61,32 @@ class DetailsWorkShop extends StatelessWidget {
               child: Text("pseudo de l'utilisateur : ",
                 style: new TextStyle(fontSize: 20, color: Colors.green),),
             ),
-            Text("${pseudoUser ?? 'undefined'}",
+            Text("${pseudoUser ?? 'Utilisateur inconnu'}",
               style: new TextStyle(fontSize: 20, color: Colors.green),),
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("${dateAvailable ?? 'Heure de début non renseignée'}",
+                style: new TextStyle(fontSize: 20, color: Colors.green),
+
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("${datEnd ?? 'Heure de fin non renseignée'}",
+                style: new TextStyle(fontSize: 20, color: Colors.green),
+
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(15.0),
 
               child: Text("Description : ",
                 style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
             ),
+
+
             Text("${description ?? 'undefined'}",
               style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
             Padding(
@@ -99,4 +121,7 @@ class DetailsWorkShop extends StatelessWidget {
     var date = dateFormat.parse(DateTime.now().toString());
     String createFormatted = dateFormat.format(date);
     return createFormatted;
-  }}
+  }
+
+
+}

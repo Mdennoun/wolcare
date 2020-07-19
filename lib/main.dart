@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/request/ModifyRequest.dart';
-import 'package:wolcaire/model/request.dart';
-import 'package:wolcaire/recyclerRow/request_item.dart';
+import 'package:wolcaire/ModifyRequest.dart';
+import 'package:wolcaire/request.dart';
+import 'package:wolcaire/request_item.dart';
 import 'package:wolcaire/user.dart';
 import 'package:wolcaire/user_item.dart';
 import 'package:flutter/material.dart';
-import 'package:wolcaire/model/workshop.dart';
-import 'package:wolcaire/recyclerRow/workshop_item.dart';
+import 'package:wolcaire/workshop.dart';
+import 'package:wolcaire/workshop_item.dart';
 import 'package:http/http.dart' as http;
 
 import 'api_services.dart';
