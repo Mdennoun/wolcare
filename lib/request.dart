@@ -8,8 +8,6 @@ class Request {
   final String idVolunteer;
 
 
-
-
   Request(this.id, this.title, this.createAt, this.pseudoUser, this.idCreator, this.description, this.idVolunteer);
 
   factory Request.fromJson(Map<String, dynamic> json) {
