@@ -42,7 +42,7 @@ class ApiServices {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         'title': title,
         'description': description
       }),
@@ -56,6 +56,26 @@ class ApiServices {
 
   }
 
+  Future<void> updateUser(String firstname, String lastname, String id) async {
+    final response =
+    await http.put(
+      'https://wolcare.herokuapp.com/api/updateUser/$id',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'firstname': firstname,
+        'lastname': lastname
+      }),
+    );
+    print("https://wolcare.herokuapp.com/api/updateUser/$id");
+    if (response.statusCode != 200) {
+      throw Error();
+    }
+    final jsonBody = json.decode(response.body);
+    print(jsonBody);
+
+  }
 
 
 

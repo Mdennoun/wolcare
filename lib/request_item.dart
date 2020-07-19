@@ -19,16 +19,17 @@ class RequestItem extends StatelessWidget {
       title: Text("${request.title} ${request.pseudoUser}"),
       subtitle: Text(request.createAt),
       onTap: (){
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => DetailsRequest(
-        id: request.id,
-        title: request.title,
-        description: request.description,
-        createAt: request.createAt,
-        pseudoUser: request.pseudoUser )),
-    );
+          Navigator.push(
+            context,
+              MaterialPageRoute(builder: (context) => DetailsRequest(
+                  id: request.id,
+                  title: request.title,
+                  description: request.description,
+                  createAt: request.createAt,
+                  pseudoUser: request.pseudoUser )),
+          );
       }
       );
+
   }
 }

@@ -29,10 +29,11 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _firstNameFilter = new TextEditingController();
   String _email = "";
   String _password = "";
-  String _pseudo ="";
-  String _lastName ="";
-  String _firstName ="";
-  FormType _form = FormType.login; // our default setting is to login, and we should switch to creating an account when the user chooses to
+  String _pseudo = "";
+  String _lastName = "";
+  String _firstName = "";
+  FormType _form = FormType
+      .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
 
   _SignupPageState() {
     _emailFilter.addListener(_emailListen);
@@ -57,6 +58,7 @@ class _SignupPageState extends State<SignupPage> {
       _password = _passwordFilter.text;
     }
   }
+
   void _firstNameListen() {
     if (_firstNameFilter.text.isEmpty) {
       _firstName = "";
@@ -64,13 +66,15 @@ class _SignupPageState extends State<SignupPage> {
       _firstName = _firstNameFilter.text;
     }
   }
+
   void _lastNameListen() {
     if (_lastNameFilter.text.isEmpty) {
       _lastName = "";
     } else {
-      _lastName = _lastName.text;
+      _lastName = _lastName;
     }
   }
+
   void _pseudoListen() {
     if (_pseudoFilter.text.isEmpty) {
       _pseudo = "";
@@ -78,3 +82,10 @@ class _SignupPageState extends State<SignupPage> {
       _pseudo = _pseudoFilter.text;
     }
   }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+}
