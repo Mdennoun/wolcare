@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:wolcaire/login_response.dart';
 import 'package:wolcaire/request.dart';
@@ -10,27 +9,27 @@ import 'package:wolcaire/workshop.dart';
 class ApiServices {
 
   Future<Login> login(String email, String password) async {
-   print("test");
-   final response =
-       await http.post(
-     'https://wolcare.herokuapp.com/api/auth/login/',
-     headers: <String, String>{
-       'Content-Type': 'application/json; charset=UTF-8',
-     },
-     body: jsonEncode(<String, String>{
-       'email': email,
-       'password': password
-     }),
-   );
-   print(response.statusCode);
+    print("test");
+    final response =
+    await http.post(
+      'https://wolcare.herokuapp.com/api/auth/login/',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'email': email,
+        'password': password
+      }),
+    );
+    print(response.statusCode);
 
-   if (response.statusCode != 200) {
-     throw Error();
-   }
-   final jsonBody = json.decode(response.body);
-   print(jsonBody);
-   final Login login =  Login.fromJson(jsonBody);
-   return login;
+    if (response.statusCode != 200) {
+      throw Error();
+    }
+    final jsonBody = json.decode(response.body);
+    print(jsonBody);
+    final Login login =  Login.fromJson(jsonBody);
+    return login;
 
   }
 
@@ -90,6 +89,28 @@ class ApiServices {
 
   }
 
+  Future<void> modificationOfWorkShop(String title, String description, String id, var datEnd, var dateAvailable) async {
+    final response =
+    await http.put(
+      'https://wolcare.herokuapp.com/api/updateWorkShop/$id',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'title': title,
+        'description': description,
+        'datEnd': datEnd
+      }),
+    );
+
+    if (response.statusCode != 200) {
+      throw Error();
+    }
+    final jsonBody = json.decode(response.body);
+    print(jsonBody);
+
+  }
+
   Future<void> updateUser(String firstname, String lastname, String id) async {
     final response =
     await http.put(
@@ -115,7 +136,7 @@ class ApiServices {
 
   static Future<List<User>> getUsers() async {
     final response =
-        await http.get("https://wolcare.herokuapp.com/api/getUsers");
+    await http.get("https://wolcare.herokuapp.com/api/getUsers");
 
     if (response.statusCode != 200) {
       throw Error();
