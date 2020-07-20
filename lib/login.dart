@@ -163,7 +163,9 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+      resizeToAvoidBottomPadding: false,
     );
+
   }
 
   Widget _buildBar(BuildContext context) {
@@ -199,6 +201,8 @@ class _LoginPageState extends State<LoginPage> {
         );
     } else {
       return new Container(
+
+        height: MediaQuery.of(context).size.height - 329,
         child: new Column(
           children: <Widget>[
             new Container(
@@ -232,6 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _firstNameFilter,
                 decoration: new InputDecoration(
                     labelText: 'prenom'
+
                 ),
                 obscureText: true,
               ),

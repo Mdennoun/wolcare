@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wolcaire/login.dart';
 
-import 'inscription.dart';
 
 
 void main() => runApp(MyApp());
