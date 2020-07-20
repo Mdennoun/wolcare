@@ -71,13 +71,30 @@ class _MyRequestStatefulWidgetState extends State<MyRequestList> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      //appBar: _buildBar(context),
-      body: new Container(
-        padding: EdgeInsets.all(16.0),
-        child: new Column(
-          children: <Widget>[
-          ],
-        ),
+      appBar: AppBar(
+        title: const Text('Wolcare'),
+      ),
+      body: Center(
+        child: test(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Utilisateurs'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            title: Text('Ateliers'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.build),
+            title: Text('Requetes'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        //onTap: _onItemTapped,
       ),
     );
   }

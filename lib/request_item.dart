@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wolcaire/request.dart';
-import 'package:wolcaire/request_by_user_list.dart';
 
 
 import 'DetailsRequest.dart';
@@ -22,12 +21,12 @@ class RequestItem extends StatelessWidget {
       onTap: (){
           Navigator.push(
             context,
-              MaterialPageRoute(builder: (context) => MyRequestList(
-                  /*id: request.id,
+              MaterialPageRoute(builder: (context) => DetailsRequest(
+                  id: request.id,
                   title: request.title,
                   description: request.description,
                   createAt: request.createAt,
-                  pseudoUser: request.pseudoUser*/ )),
+                  pseudoUser: request.pseudoUser )),
           );
       }
       );
