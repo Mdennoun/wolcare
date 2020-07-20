@@ -95,7 +95,7 @@ class ModifyWorkShop extends StatelessWidget {
                 textColor: Colors.white,
                 onPressed: () {
                   ApiServices services = new ApiServices();
-                  services.modificationOfWorkShop(titlEdt.text.toString(),descriptionEdt.text.toString(), id, DateTime);
+                  services.modificationOfWorkShop(titlEdt.text.toString(),descriptionEdt.text.toString(), id, DateTime, DateTime);//TODO remplacer pâr les vrai valur
                   Navigator.of(context).pop();
 
                 },
@@ -142,6 +142,10 @@ class ModifyWorkShop extends StatelessWidget {
     //});
     return selectedTime;
   }
+
+
+
+
 
 
 }

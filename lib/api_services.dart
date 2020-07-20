@@ -55,7 +55,7 @@ class ApiServices {
 
   }
 
-  Future<void> modificationOfWorkShop(String title, String description, String id, var datEnd) async {
+  Future<void> modificationOfWorkShop(String title, String description, String id, var datEnd, var dateAvailable) async {
     final response =
     await http.put(
       'https://wolcare.herokuapp.com/api/updateWorkShop/$id',
