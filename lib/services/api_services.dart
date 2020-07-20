@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:wolcaire/model/connected_user.dart' as globals;
 import 'package:wolcaire/model/login_response.dart';
 import 'package:wolcaire/model/request.dart';
 import 'package:wolcaire/model/user.dart';
@@ -23,6 +24,7 @@ class ApiServices {
     final jsonBody = json.decode(response.body);
     print(jsonBody);
     final Login login = Login.fromJson(jsonBody);
+    globals.id = login.idUser;
     return login;
   }
 
@@ -127,6 +129,20 @@ class ApiServices {
 
     return users;
   }
+  static Future<User> getUser(String id) async {
+    var url = "https://wolcare.herokuapp.com/api/getUserById/$id";
+    final response =
+    await http.get(url);
+
+    if (response.statusCode != 200) {
+      throw Error();
+    }
+    final jsonBody = json.decode(response.body);
+    final User user = User.fromJson(jsonBody);
+
+    return user;
+  }
+
 
   static Future<List<Workshop>> getWorkshops() async {
     final response =
