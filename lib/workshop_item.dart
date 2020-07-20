@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/user.dart';
 import 'package:wolcaire/workshop.dart';
+import 'package:wolcaire/DetailsWorkShop.dart';
 
 class WorkshopItem extends StatelessWidget {
   final Workshop workshop;
@@ -20,6 +20,17 @@ class WorkshopItem extends StatelessWidget {
 
       title: Text("${workshop.title}"),
       subtitle: Text(workshop.dateAvailable),
+        onTap: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DetailsWorkShop(
+                id: workshop.id,
+                title: workshop.title,
+                description: workshop.description,
+                createAt: workshop.createAt,
+                )),
+          );
+        }
     );
   }
 }
