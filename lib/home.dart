@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/ModifyRequest.dart';
-import 'package:wolcaire/login.dart';
 import 'package:wolcaire/request.dart';
 import 'package:wolcaire/request_item.dart';
 import 'package:wolcaire/user.dart';
 import 'package:wolcaire/user_item.dart';
-import 'package:flutter/material.dart';
 import 'package:wolcaire/workshop.dart';
 import 'package:wolcaire/workshop_item.dart';
-import 'package:http/http.dart' as http;
 
 import 'api_services.dart';
-import 'login_response.dart';
 
 
 
@@ -24,8 +19,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
   Widget test(int index) {
     switch(index) {
       case 0:

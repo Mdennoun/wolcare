@@ -9,6 +9,7 @@ class UpdateUser extends StatelessWidget {
   final String id;
   final String lastName;
   final String firstName;
+  final String photo;
   final String pseudo;
   final String sex;
   final String requestIssued;
@@ -19,6 +20,7 @@ class UpdateUser extends StatelessWidget {
     this.id,
     this.lastName,
     this.firstName,
+    this.photo,
     this.pseudo,
     this.sex,
     this.requestIssued,
@@ -31,31 +33,49 @@ class UpdateUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildBar(context),
-      body: Center(
-        child: Column(
+      body:  CustomScrollView(
+      slivers: <Widget>[
+      SliverAppBar(
+
+      expandedHeight: 300,
+      flexibleSpace: FlexibleSpaceBar(
+      title: Text("$firstName $lastName"),
+      background: Hero(
+      tag: "pseudo",
+      child: Image.network(photo,
+      fit: BoxFit.cover,
+      ),
+
+      ),
+
+      ),
+
+
+      ),
+      SliverAppBar(
+
+        expandedHeight: 300,
+        backgroundColor: Colors.white,
+        flexibleSpace: Column(
 
           children: <Widget>[
 
             Text("Prenom: ",
-              style: new TextStyle(fontSize: 17, color: Colors.orange),),
+              style: new TextStyle(fontSize: 17, color: Colors.black),),
             TextField(
                 controller: TextEditingController(text: firstName)
             ),
             Text("Nom  : ",
-              style: new TextStyle(fontSize: 17, color: Colors.green),),
+              style: new TextStyle(fontSize: 17, color: Colors.black),),
             TextField(
                 controller: TextEditingController(text: lastName)
             ),
             Text("Pseudo  : ",
-              style: new TextStyle(fontSize: 17, color: Colors.green),),
+              style: new TextStyle(fontSize: 17, color: Colors.black),),
             TextField(
                 controller: TextEditingController(text: pseudo)
             ),
-            Text("id : ",
-              style: new TextStyle(fontSize: 17, color: Colors.lightBlue),),
-            TextField(
-                controller: TextEditingController(text: id)
-            ),
+
             RaisedButton(
               child: Text("Enregistrer les modifications"),
               onPressed: () {
@@ -63,18 +83,34 @@ class UpdateUser extends StatelessWidget {
                 Navigator.of(context).pop();
 
 
+
               },
             ),
           ],
 
-        ),
+
+        )
+
+
+
+
+    ),
+
+
+        ],
+
       ),
     );
   }
 
-  Widget _buildBar(BuildContext context) {
+
+
+
+
+
+Widget _buildBar(BuildContext context) {
     return new AppBar(
-      title: new Text("Modification de la requête"),
+      title: new Text("Modification du profil"),
       centerTitle: true,
     );
   }

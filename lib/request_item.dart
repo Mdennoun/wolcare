@@ -15,7 +15,10 @@ class RequestItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.build),
+      leading:  ClipRRect(
+          child: Image.network("https://www.territoiredebelfort.fr/sites/default/files/styles/large/public/environnement-maison-departementale-environnement-jardin-douce-territoire-belfort.jpg?itok=-zsGVk-t")
+
+      ),
       title: Text("${request.title} ${request.pseudoUser}"),
       subtitle: Text(request.createAt),
       onTap: (){

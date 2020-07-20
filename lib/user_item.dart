@@ -13,8 +13,17 @@ class UserItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var p = "https://plaisirdepeindre.fr/28-thickbox_default/peinture-par-numero-singe-pop-art.jpg";
+    if(user.photo.substring(0) != 'u') {
+      p = user.photo;
+    }
     return ListTile(
-      leading: Image.network("https://plaisirdepeindre.fr/28-thickbox_default/peinture-par-numero-singe-pop-art.jpg"),
+      leading: CircleAvatar(
+          child: ClipOval(
+              child: Image.network(p)
+
+          ),
+      ),
       title: Text("${user.firstName} ${user.lastName}"),
       subtitle: Text(user.type),
         onTap: (){
@@ -25,7 +34,7 @@ class UserItem extends StatelessWidget {
                 lastName: user.lastName,
                 firstName: user.firstName,
                 pseudo: user.pseudo,
-                photo: "https://plaisirdepeindre.fr/28-thickbox_default/peinture-par-numero-singe-pop-art.jpg",
+                photo: p,
                 sex: user.sex.toString(),
                 requestFulfilled: user.requestFulfilled.toString())),
           );
