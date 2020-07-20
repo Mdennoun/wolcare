@@ -276,7 +276,7 @@ class _LoginPageState extends State<LoginPage> {
         child: new Column(
           children: <Widget>[
             new RaisedButton(
-              child: new Text('S\'inscrir'),
+              child: new Text('S\'inscrire'),
               onPressed: _createAccountPressed,
             ),
             new FlatButton(
@@ -316,7 +316,7 @@ class _LoginPageState extends State<LoginPage> {
   void _createAccountPressed () {
     print('L\'utilisateur souhaite s\'inscrir');
     ApiServices services = new ApiServices();
-    User user = new User(null, _lastName, _firstName,_email,_password, _type, _pseudo, _photo, _sex, _requestIssued, _requestFulfilled);
+    User user = new User(null, _lastName, _firstName,_email,_password, "flutter", _pseudo, _photo, _sex, _requestIssued, _requestFulfilled);
     services.signUp(user).then((result) {
       print(result);
       setState(() {
