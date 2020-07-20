@@ -26,6 +26,7 @@ class WorkshopItem extends StatelessWidget {
             MaterialPageRoute(builder: (context) => DetailsWorkShop(
                 id: workshop.id,
                 title: workshop.title,
+                photoPath: "https://www.territoiredebelfort.fr/sites/default/files/styles/large/public/environnement-maison-departementale-environnement-jardin-douce-territoire-belfort.jpg?itok=-zsGVk-t",
                 description: workshop.description,
                 createAt: workshop.createAt,
                 )),

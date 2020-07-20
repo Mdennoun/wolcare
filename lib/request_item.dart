@@ -28,6 +28,7 @@ class RequestItem extends StatelessWidget {
                   id: request.id,
                   title: request.title,
                   description: request.description,
+                  photoPath: "https://www.territoiredebelfort.fr/sites/default/files/styles/large/public/environnement-maison-departementale-environnement-jardin-douce-territoire-belfort.jpg?itok=-zsGVk-t",
                   createAt: request.createAt,
                   pseudoUser: request.pseudoUser )),
           );

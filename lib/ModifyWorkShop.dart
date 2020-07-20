@@ -8,6 +8,7 @@ class ModifyWorkShop extends StatelessWidget {
   final String id;
   final String title;
   final String createAt;
+  final String photoPath;
   final String pseudoUser;
   final String idCreator;
   final String description;
@@ -19,6 +20,7 @@ class ModifyWorkShop extends StatelessWidget {
     this.dateAvailable,
     this.title,
     this.id,
+    this.photoPath,
     this.idVolunteer,
     this.idCreator,
     this.createAt,
@@ -33,26 +35,45 @@ class ModifyWorkShop extends StatelessWidget {
     final descriptionEdt = new TextEditingController(text: description);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      appBar: _buildBar(context),
-      body: Center(
-        child: Column(
+      body: CustomScrollView(
+        slivers: <Widget>[
+        SliverAppBar(
+
+        expandedHeight: 200,
+        flexibleSpace: FlexibleSpaceBar(
+          title: Text("$title"),
+          background: Hero(
+            tag: "pseudo",
+            child: Image.network(photoPath,
+              fit: BoxFit.cover,
+            ),
+
+          ),
+        ),
+
+
+      ),
+      SliverAppBar(
+
+        expandedHeight: 400,
+        backgroundColor: Colors.white,
+        flexibleSpace: Column(
+
+
+          mainAxisAlignment: MainAxisAlignment.start,
 
           children: <Widget>[
 
-            Text("Title : ",
-              style: new TextStyle(fontSize: 30, color: Colors.orange),),
-            TextField(
-                controller: TextEditingController(text: title)
-            ),
-            Text("Date de création : ${createAt ?? 'undefined'}",
-                style: new TextStyle(fontSize: 18, color: Colors.black)),
-            Text("pseudo de l'utilisateur : ",
-              style: new TextStyle(fontSize: 20, color: Colors.green),),
+
+            Text("Date de création : ${createAt ?? 'undefined'}", textAlign: TextAlign.left,
+                style: new TextStyle(fontSize: 17, color: Colors.black)),
+            Text("pseudo de l'utilisateur : ", textAlign: TextAlign.left,
+              style: new TextStyle(fontSize: 17, color: Colors.green),),
             TextField(
                 controller: TextEditingController(text: pseudoUser)
             ),
-            Text("Description : ",
-              style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
+            Text("Description : ", textAlign: TextAlign.left,
+              style: new TextStyle(fontSize: 17, color: Colors.lightBlue),),
             TextField(
                 controller: TextEditingController(text: description)
             ),
@@ -105,8 +126,12 @@ class ModifyWorkShop extends StatelessWidget {
 
         ),
       ),
+        ],
+
+      ),
     );
   }
+
 
   Widget _buildBar(BuildContext context) {
     return new AppBar(

@@ -11,6 +11,7 @@ class DetailsWorkShop extends StatelessWidget {
   final String pseudoUser;
   final String idCreator;
   final String description;
+  final String photoPath;
   final String idVolunteer;
   final String dateAvailable;
   final String datEnd;
@@ -26,69 +27,82 @@ class DetailsWorkShop extends StatelessWidget {
     this.createAt,
     this.pseudoUser,
     this.description,
+    this.photoPath,
     this.datEnd
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildBar(context),
-      body: Center(
-        child: Column(
+
+      body: CustomScrollView(
+        slivers: <Widget>[
+        SliverAppBar(
+
+        expandedHeight: 200,
+        flexibleSpace: FlexibleSpaceBar(
+          title: Text("$title"),
+          background: Hero(
+            tag: "pseudo",
+            child: Image.network(photoPath,
+              fit: BoxFit.cover,
+            ),
+
+          ),
+        ),
+
+
+      ),
+      SliverAppBar(
+
+        expandedHeight: 400,
+        backgroundColor: Colors.white,
+        flexibleSpace: Column(
+
 
           mainAxisAlignment: MainAxisAlignment.start,
 
           children: <Widget>[
 
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text("Titre : ",
-                style: new TextStyle(fontSize: 30, color: Colors.blueAccent),),
-            ),
-            Text( "${title ?? 'undefined'}",
-              style: new TextStyle(fontSize: 30, color: Colors.blueAccent),),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-
-              child: Text("Date de création :",
-                  style: new TextStyle(fontSize: 18, color: Colors.black)),
-            ),
-            Text(" ${dateConverter() ?? 'undefined'}",
-                style: new TextStyle(fontSize: 18, color: Colors.black)),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-
-              child: Text("pseudo de l'utilisateur : ",
-                style: new TextStyle(fontSize: 20, color: Colors.green),),
-            ),
-            Text("${pseudoUser ?? 'Utilisateur inconnu'}",
-              style: new TextStyle(fontSize: 20, color: Colors.green),),
 
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Text("${dateAvailable ?? 'Heure de début non renseignée'}",
-                style: new TextStyle(fontSize: 20, color: Colors.green),
+
+              child: Text("Date de création :  ${dateConverter() ?? 'undefined'}",textAlign: TextAlign.left,
+                  style: new TextStyle(fontSize: 17, color: Colors.black)),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+
+              child: Text("pseudo : ${pseudoUser ?? 'Utilisateur inconnu'}",textAlign: TextAlign.left,
+                style: new TextStyle(fontSize: 17, color: Colors.black),),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Heure début : ${dateAvailable ?? 'Heure de début non renseignée'}",textAlign: TextAlign.left,
+                style: new TextStyle(fontSize: 17, color: Colors.black),
 
               ),
             ),
 
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Text("${datEnd ?? 'Heure de fin non renseignée'}",
-                style: new TextStyle(fontSize: 20, color: Colors.green),
+              child: Text("Heure de fin: ${datEnd ?? 'Heure de fin non renseignée'}",textAlign: TextAlign.left,
+                style: new TextStyle(fontSize: 20, color: Colors.black),
 
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
 
-              child: Text("Description : ",
-                style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
+              child: Text("Description : ",textAlign: TextAlign.left,
+                style: new TextStyle(fontSize: 21, color: Colors.black),),
             ),
 
 
-            Text("${description ?? 'undefined'}",
-              style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
+            Text("${description ?? 'undefined'}",textAlign: TextAlign.left,
+              style: new TextStyle(fontSize: 21, color: Colors.black),),
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: RaisedButton(
@@ -98,13 +112,16 @@ class DetailsWorkShop extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ModifyWorkShop(id: id, title: title, description: description, createAt: createAt, pseudoUser: pseudoUser, )),
+                    MaterialPageRoute(builder: (context) => ModifyWorkShop(id: id, title: title, description: description,photoPath: photoPath, createAt: createAt, pseudoUser: pseudoUser, )),
                   );
                 },
               ),
             ),
           ],
         ),
+      ),
+        ],
+
       ),
     );
   }
