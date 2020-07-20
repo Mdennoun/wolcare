@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/request.dart';
-import 'package:wolcaire/request_item.dart';
-import 'package:wolcaire/user.dart';
-import 'package:wolcaire/user_item.dart';
-import 'package:wolcaire/workshop.dart';
-import 'package:wolcaire/workshop_item.dart';
+import 'package:wolcaire/model/request.dart';
+import 'package:wolcaire/controller/request_item.dart';
+import 'package:wolcaire/model/user.dart';
+import 'package:wolcaire/controller/user_item.dart';
+import 'package:wolcaire/model/workshop.dart';
+import 'package:wolcaire/controller/workshop_item.dart';
 
-import 'api_services.dart';
-
-
+import '../services/api_services.dart';
 
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
@@ -21,7 +19,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
 
   Widget test(int index) {
-    switch(index) {
+    switch (index) {
       case 0:
         Future<List<User>> users = ApiServices.getUsers();
         return FutureBuilder(
@@ -138,19 +136,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   }
                   return ListView.builder(
                     itemCount: requests.length,
-
                     itemBuilder: (BuildContext context, int index) {
-
-
                       return RequestItem(
-
                         request: requests[index],
                       );
-
-
                     },
                   );
-
                 } else {
                   return Center(
                     child: Text("No data"),
@@ -164,9 +155,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           },
         );
         break;
-
     }
-
 
     return FutureBuilder(
       future: ApiServices.getUsers(),
@@ -212,25 +201,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
   }
 
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-
     });
   }
 
   void _onRequestTapped(int index) {
     setState(() {
       _selectedIndex = index;
-
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Wolcare'),

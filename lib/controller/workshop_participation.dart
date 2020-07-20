@@ -44,7 +44,6 @@
 *
 * */
 
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -64,25 +63,22 @@ class WorkShopParticipation extends StatelessWidget {
 //TODO faire le listing des workShop participation, les dates dans modifWORKS ->
 // enregistrer et seter les dates en parametre (modifier aussi api servies et enlever les fichier / dossierz
 
-  const WorkShopParticipation({
-    this.dateAvailable,
-    this.title,
-    this.id,
-    this.idVolunteer,
-    this.idCreator,
-    this.createAt,
-    this.pseudoUser,
-    this.description,
-    this.datEnd
-  });
+  const WorkShopParticipation(
+      {this.dateAvailable,
+      this.title,
+      this.id,
+      this.idVolunteer,
+      this.idCreator,
+      this.createAt,
+      this.pseudoUser,
+      this.description,
+      this.datEnd});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildBar(context),
-      body: Center(
-
-      ),
+      body: Center(),
     );
   }
 
@@ -93,12 +89,10 @@ class WorkShopParticipation extends StatelessWidget {
     );
   }
 
-  String dateConverter () {
+  String dateConverter() {
     final dateFormat = new DateFormat('yyyy-MM-dd');
     var date = dateFormat.parse(DateTime.now().toString());
     String createFormatted = dateFormat.format(date);
     return createFormatted;
   }
-
-
 }

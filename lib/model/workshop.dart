@@ -6,7 +6,8 @@ class Workshop {
   final String description;
   final String createAt;
 
-  Workshop(this.title, this.dateAvailable, this.datEnd, this.description,this.id, this.createAt);
+  Workshop(this.title, this.dateAvailable, this.datEnd, this.description,
+      this.id, this.createAt);
 
   factory Workshop.fromJson(Map<String, dynamic> json) {
     return Workshop(
@@ -16,7 +17,6 @@ class Workshop {
       json["description"],
       json["datEnd"],
       json["createAt"],
-
     );
   }
 }

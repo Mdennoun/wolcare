@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/user.dart';
+import 'package:wolcaire/model/user.dart';
 
-import 'api_services.dart';
+import '../services/api_services.dart';
 import 'home.dart';
-import 'login_response.dart';
+import '../model/login_response.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,13 +11,9 @@ class LoginPage extends StatefulWidget {
 }
 
 // Used for controlling whether the user is loggin or creating an account
-enum FormType {
-  login,
-  register
-}
+enum FormType { login, register }
 
 class _LoginPageState extends State<LoginPage> {
-
   final TextEditingController _emailFilter = new TextEditingController();
   final TextEditingController _passwordFilter = new TextEditingController();
 
@@ -27,21 +23,24 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _typeFilter = new TextEditingController();
   final TextEditingController _photoFilter = new TextEditingController();
   final TextEditingController _sexFilter = new TextEditingController();
-  final TextEditingController _requestIssuedFilter = new TextEditingController();
-  final TextEditingController _requestFulfilledFilter = new TextEditingController();
+  final TextEditingController _requestIssuedFilter =
+      new TextEditingController();
+  final TextEditingController _requestFulfilledFilter =
+      new TextEditingController();
   String _email = "";
   String _password = "";
 
   String _pseudo = "";
   String _lastName = "";
   String _firstName = "";
-  String _type="";
-  String _photo="";
-  bool _sex =false;
-  int _requestIssued =0;
-  int _requestFulfilled =0;
+  String _type = "";
+  String _photo = "";
+  bool _sex = false;
+  int _requestIssued = 0;
+  int _requestFulfilled = 0;
 
-  FormType _form = FormType.login; // our default setting is to login, and we should switch to creating an account when the user chooses to
+  FormType _form = FormType
+      .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
 
   _LoginPageState() {
     _emailFilter.addListener(_emailListen);
@@ -55,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
     _sexFilter.addListener(_sexListen);
     _requestIssuedFilter.addListener(_requestIssuedListen);
     _requestFulfilledFilter.addListener(_requestFulfilledListen);
-
   }
 
   void _emailListen() {
@@ -138,9 +136,8 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-
   // Swap in between our two forms, registering and logging in
-  void _formChange () async {
+  void _formChange() async {
     setState(() {
       if (_form == FormType.register) {
         _form = FormType.login;
@@ -165,7 +162,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
       resizeToAvoidBottomPadding: false,
     );
-
   }
 
   Widget _buildBar(BuildContext context) {
@@ -176,86 +172,67 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildTextFields() {
-    if(_form == FormType.login){
-        return new Container(
-          child: new Column(
-            children: <Widget>[
-              new Container(
-                child : new TextField(
-                  controller: _emailFilter,
-                  decoration: new InputDecoration(
-                    labelText: 'Email'
-                  ),
-                )
+    if (_form == FormType.login) {
+      return new Container(
+        child: new Column(
+          children: <Widget>[
+            new Container(
+                child: new TextField(
+              controller: _emailFilter,
+              decoration: new InputDecoration(labelText: 'Email'),
+            )),
+            new Container(
+              child: new TextField(
+                controller: _passwordFilter,
+                decoration: new InputDecoration(labelText: 'Mot de passe'),
               ),
-              new Container(
-                child :new TextField(
-                  controller: _passwordFilter,
-                  decoration: new InputDecoration(
-                    labelText: 'Mot de passe'
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
+            ),
+          ],
+        ),
+      );
     } else {
       return new Container(
-
         height: MediaQuery.of(context).size.height - 329,
         child: new Column(
           children: <Widget>[
             new Container(
               child: new TextField(
                 controller: _emailFilter,
-                decoration: new InputDecoration(
-                    labelText: 'Email'
-                ),
+                decoration: new InputDecoration(labelText: 'Email'),
               ),
             ),
             new Container(
               child: new TextField(
                 controller: _passwordFilter,
-                decoration: new InputDecoration(
-                    labelText: 'Password'
-                ),
+                decoration: new InputDecoration(labelText: 'Password'),
                 obscureText: true,
               ),
             ),
             new Container(
               child: new TextField(
                 controller: _pseudoFilter,
-                decoration: new InputDecoration(
-                    labelText: 'Pseudo'
-                ),
+                decoration: new InputDecoration(labelText: 'Pseudo'),
                 obscureText: true,
               ),
             ),
             new Container(
               child: new TextField(
                 controller: _firstNameFilter,
-                decoration: new InputDecoration(
-                    labelText: 'prenom'
-
-                ),
+                decoration: new InputDecoration(labelText: 'prenom'),
                 obscureText: true,
               ),
             ),
             new Container(
               child: new TextField(
                 controller: _lastNameFilter,
-                decoration: new InputDecoration(
-                    labelText: 'nom'
-                ),
+                decoration: new InputDecoration(labelText: 'nom'),
                 obscureText: true,
               ),
             ),
             new Container(
               child: new TextField(
                 controller: _photoFilter,
-                decoration: new InputDecoration(
-                    labelText: 'mettez une photo'
-                ),
+                decoration: new InputDecoration(labelText: 'mettez une photo'),
                 obscureText: true,
               ),
             ),
@@ -305,32 +282,33 @@ class _LoginPageState extends State<LoginPage> {
 
   // These functions can self contain any user auth logic required, they all have access to _email and _password
 
-  void _loginPressed () {
+  void _loginPressed() {
     print('L\'utilisateur souhaite se connecter avec $_email et $_password');
     ApiServices services = new ApiServices();
     Login login;
-    services.login(_email,_password).then((result) {
-    print(result);
-    setState(() {
-       login = result;
+    services.login(_email, _password).then((result) {
+      print(result);
+      setState(() {
+        login = result;
 
         print(login.auth);
-       if(login.auth){
-         Navigator.push(
-           context,
-           MaterialPageRoute(builder: (context) => MyStatefulWidget()),
-         );
-       } else {
-         print("Error on login");
-       }
-    });
+        if (login.auth) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyStatefulWidget()),
+          );
+        } else {
+          print("Error on login");
+        }
+      });
     });
   }
 
-  void _createAccountPressed () {
+  void _createAccountPressed() {
     print('L\'utilisateur souhaite s\'inscrir');
     ApiServices services = new ApiServices();
-    User user = new User(null, _lastName, _firstName,_email,_password, "flutter", _pseudo, _photo, _sex, _requestIssued, _requestFulfilled);
+    User user = new User(null, _lastName, _firstName, _email, _password,
+        "flutter", _pseudo, _photo, _sex, _requestIssued, _requestFulfilled);
     services.signUp(user).then((result) {
       print(result);
       setState(() {
@@ -349,13 +327,8 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-
-
-
-
-  void _passwordReset () {
-    print("L\'utilisateur veut qu'on envoi le mail de renisialisation a  $_email");
+  void _passwordReset() {
+    print(
+        "L\'utilisateur veut qu'on envoi le mail de renisialisation a  $_email");
   }
-
-
 }

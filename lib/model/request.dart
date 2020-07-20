@@ -10,15 +10,11 @@ class Request {
   final String idVolunteer;
   final String photoPath;
 
-
-
-
-  Request(this.id, this.title, this.createAt, this.pseudoUser, this.idCreator, this.description, this.idVolunteer, this.photoPath);
-
+  Request(this.id, this.title, this.createAt, this.pseudoUser, this.idCreator,
+      this.description, this.idVolunteer, this.photoPath);
 
   factory Request.fromJson(Map<String, dynamic> json) {
     return Request(
-
       json["_id"],
       json["title"],
       json["createAt"],
@@ -27,9 +23,6 @@ class Request {
       json["description"],
       json["idVolunteer"],
       json["photoPath"],
-
-
-
     );
   }
 }
