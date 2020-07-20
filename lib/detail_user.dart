@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/ModifyRequest.dart';
 import 'package:wolcaire/update_user.dart';
 
 class DetailsUser extends StatelessWidget {
@@ -79,6 +78,7 @@ class DetailsUser extends StatelessWidget {
                         lastName: lastName,
                         firstName: firstName,
                         pseudo: pseudo,
+                        photo: photo,
                         sex: sex,
                         requestIssued: requestIssued,
                         requestFulfilled: requestFulfilled,

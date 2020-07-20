@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:wolcaire/login_response.dart';
 import 'package:wolcaire/request.dart';
