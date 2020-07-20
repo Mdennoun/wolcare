@@ -15,6 +15,7 @@ class Request {
 
   Request(this.id, this.title, this.createAt, this.pseudoUser, this.idCreator, this.description, this.idVolunteer, this.photoPath);
 
+
   factory Request.fromJson(Map<String, dynamic> json) {
     return Request(
 

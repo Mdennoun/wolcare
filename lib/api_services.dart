@@ -33,6 +33,40 @@ class ApiServices {
 
   }
 
+  Future<User> signUp(User user) async {
+    print("test");
+    final response =
+    await http.post(
+      'https://wolcare.herokuapp.com/api/auth/login/',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'email': user.email,
+        'password': user.password,
+        'lastName': user.lastName,
+        'firstName': user.firstName,
+        'pseudo': user.pseudo,
+        'photo': user.photo,
+        'sex': user.sex.toString(),
+        'type': user.type,
+        'requestIssued': user.requestIssued.toString(),
+        'requestFulfilled': user.requestFulfilled.toString(),
+      }),
+    );
+    print(response.statusCode);
+
+    if (response.statusCode != 200) {
+      throw Error();
+    }
+    final jsonBody = json.decode(response.body);
+    print(jsonBody);
+    final User my_user =  User.fromJson(jsonBody);
+    return my_user;
+
+  }
+
+
 
   Future<void> modificationOfRequest(String title, String description, String id) async {
     final response =
