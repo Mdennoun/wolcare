@@ -34,6 +34,32 @@ class ApiServices {
   }
 
 
+  static Future<List<Request>> getRequestsByUser(String idUser) async {
+    final response =
+    await http.post(
+      'https://wolcare.herokuapp.com/api/getRequestsByUser/',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'idVolunteer': idUser
+      }),
+    );
+    print(response.statusCode);
+
+    if (response.statusCode != 200) {
+      throw Error();
+    }
+    final jsonBody = json.decode(response.body);
+    print(jsonBody);
+
+    final List<Request> requests = [];
+    requests.addAll((jsonBody as List).map((request) => Request.fromJson(request)).toList());
+
+    return requests;
+
+  }
+
   Future<void> modificationOfRequest(String title, String description, String id) async {
     final response =
     await http.put(
