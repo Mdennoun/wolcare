@@ -245,6 +245,15 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
               ),
             ),
+            new Container(
+              child: new TextField(
+                controller: _photoFilter,
+                decoration: new InputDecoration(
+                    labelText: 'mettez une photo'
+                ),
+                obscureText: true,
+              ),
+            ),
           ],
         ),
       );
