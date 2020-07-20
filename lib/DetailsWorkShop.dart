@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wolcaire/ModifyRequest.dart';
 import 'package:intl/intl.dart';
+import 'package:wolcaire/ModifyWorkShop.dart';
 
-class DetailsRequest extends StatelessWidget {
-  static const String routeName = "DetailsRequest";
+class DetailsWorkShop extends StatelessWidget {
+  static const String routeName = "DetailsWorkShop";
 
   final String id;
   final String title;
@@ -12,16 +12,21 @@ class DetailsRequest extends StatelessWidget {
   final String idCreator;
   final String description;
   final String idVolunteer;
+  final String dateAvailable;
+  final String datEnd;
 
 
-  const DetailsRequest({
+
+  const DetailsWorkShop({
+    this.dateAvailable,
     this.title,
     this.id,
     this.idVolunteer,
     this.idCreator,
     this.createAt,
     this.pseudoUser,
-    this.description
+    this.description,
+    this.datEnd
   });
 
   @override
@@ -56,14 +61,32 @@ class DetailsRequest extends StatelessWidget {
               child: Text("pseudo de l'utilisateur : ",
                 style: new TextStyle(fontSize: 20, color: Colors.green),),
             ),
-            Text("${pseudoUser ?? 'undefined'}",
+            Text("${pseudoUser ?? 'Utilisateur inconnu'}",
               style: new TextStyle(fontSize: 20, color: Colors.green),),
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("${dateAvailable ?? 'Heure de début non renseignée'}",
+                style: new TextStyle(fontSize: 20, color: Colors.green),
+
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("${datEnd ?? 'Heure de fin non renseignée'}",
+                style: new TextStyle(fontSize: 20, color: Colors.green),
+
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(15.0),
 
               child: Text("Description : ",
                 style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
             ),
+
+
             Text("${description ?? 'undefined'}",
               style: new TextStyle(fontSize: 21, color: Colors.lightBlue),),
             Padding(
@@ -75,7 +98,7 @@ class DetailsRequest extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ModifyRequest(id: id, title: title, description: description, createAt: createAt, pseudoUser: pseudoUser, )),
+                    MaterialPageRoute(builder: (context) => ModifyWorkShop(id: id, title: title, description: description, createAt: createAt, pseudoUser: pseudoUser, )),
                   );
                 },
               ),
@@ -88,14 +111,17 @@ class DetailsRequest extends StatelessWidget {
 
   Widget _buildBar(BuildContext context) {
     return new AppBar(
-      title: new Text("Détail de la requête"),
+      title: new Text("Détail de l'atelier"),
       centerTitle: true,
     );
   }
 
   String dateConverter () {
     final dateFormat = new DateFormat('yyyy-MM-dd');
-    var date = dateFormat.parse(createAt.toString());
+    var date = dateFormat.parse(DateTime.now().toString());
     String createFormatted = dateFormat.format(date);
     return createFormatted;
-  }}
+  }
+
+
+}
